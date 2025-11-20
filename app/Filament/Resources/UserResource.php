@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
+use App\Models\Order;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -16,6 +17,8 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
+use App\Filament\Resources\UserResource\RelationManagers\OrdersRelationManager;
+
 
 class UserResource extends Resource
 {
@@ -78,7 +81,9 @@ class UserResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            OrdersRelationManager::class,
+        ];
     }
 
     public static function getPages(): array
