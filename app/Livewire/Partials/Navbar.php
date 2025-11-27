@@ -18,10 +18,11 @@ class Navbar extends Component
     
 
     #[On('update-cart-count')]
-    public function updateCartCount($total)
-    {
-        $this->total_count = $total;
-    }
+public function updateCartCount()
+{
+    $this->total_count = count(CartManagement::getCartItemsFromCookie());
+}
+
 
     public function render()
     {
