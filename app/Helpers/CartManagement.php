@@ -37,7 +37,7 @@ class CartManagement
         }
     }
     self::addCartItemsToCookie($cart_items);
-    return $cart_items;
+    return count ($cart_items);
 }
 
     // remove item from cart
