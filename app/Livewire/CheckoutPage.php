@@ -3,12 +3,15 @@
 namespace App\Livewire;
 
 use App\Helpers\CartManagement;
+use App\Mail\OrderPlaced;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\Order;
 use App\Models\Address;
+use Illuminate\Support\Facades\Mail;
 use Stripe\Stripe;   
 use Stripe\Checkout\Session;
+
 
 #[Title('Checkout Page')]
 class CheckoutPage extends Component
@@ -101,6 +104,7 @@ class CheckoutPage extends Component
         $address->save();
         $order->items()->createMany($cart_items);
         CartManagement::clearCartItems();
+        Mail::to(request()->user())->send(new OrderPlaced($order));
         return redirect($redirect_url);
     }
 
